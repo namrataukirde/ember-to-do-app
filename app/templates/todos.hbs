@@ -9,10 +9,10 @@
       {{#each model as |todo|}}
         <li class="extra {{if todo.isCompleted 'completed' 'not-completed'}} {{if todo.isEditing 'editing'}}">
         {{#if todo.isEditing}}
-          <input class= "edit">
+          {{edit-todo class="edit" value= todo.title focus-out=(action "acceptChanges" todo) insert-newline=(action "acceptChanges" todo)}}
         {{else}}
           {{input type="checkbox" checked=todo.isCompleted classNames="toggle" action="markComplete"}}
-          <label {{action "editToDo" todo on= "doubleClick"}} >{{todo.title}}</label><button class="destroy"></button>
+          <label {{action "editToDo" todo on= "doubleClick"}} >{{todo.title}}</label><button class="destroy" {{action "removeToDo" todo}}></button>
         {{/if}}
         </li>
       {{/each}}

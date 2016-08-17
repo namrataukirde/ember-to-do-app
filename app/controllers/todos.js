@@ -26,6 +26,21 @@ export default Ember.Controller.extend({
     },
 
     isEditing: false,
+
+    acceptChanges(todo){
+      if(Ember.isEmpty(todo.get('title'))){
+        this.send('removeToDo', todo);
+      } else {
+        // this.get('model').save();
+        todo.save();
+      }
+      todo.set('isEditing',false)
+    },
+    removeToDo(todo){
+      // var todo = this.get('model');
+      todo.deleteRecord();
+      todo.save();
+    },
   },
 
   remaining: Ember.computed("model.@each.isCompleted", function(){
@@ -36,16 +51,4 @@ export default Ember.Controller.extend({
     var remaining = this.get('remaining');
     return remaining == 1 ? 'item' : 'items'
   }),
-
-  // isCompleted: Ember.computed("model.isCompleted", function(key, value){
-  //   var model = this.get('model');
-
-  //   if(value == undefined){
-  //     return model.get('isCompleted');
-  //   } else {
-  //     model.set('isCompleted', value)
-  //     model.save();
-  //     return value;
-  //   }
-  // })
 });
