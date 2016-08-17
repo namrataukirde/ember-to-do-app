@@ -1,0 +1,40 @@
+<section id="todoapp">
+  <header id="header">
+    <h1>todos</h1>
+    {{input type= "text" id= "new-todo" placeholder= "what needs to be done????" value= newTitle action= "createTodo"}}
+  </header>
+
+  <section id="main">
+    <ul id="todo-list">
+      {{#each model as |todo|}}
+        <li class="extra {{if todo.isCompleted 'completed' 'not-completed'}}">
+          {{input type="checkbox" checked=todo.isCompleted classNames="toggle" action="markComplete"}}
+          <label>{{todo.title}}</label><button class="destroy"></button>
+        </li>
+      {{/each}}
+    </ul>
+
+    <input type="checkbox" id="toggle-all">
+  </section>
+
+  <footer id="footer">
+    <span id="todo-count">
+      <strong>2</strong> todos left
+    </span>
+    <ul id="filters">
+      <li>
+        <a href="all" class="selected">All</a>
+      </li>
+      <li>
+        <a href="active">Active</a>
+      </li>
+      <li>
+        <a href="completed">Completed</a>
+      </li>
+    </ul>
+
+    <button id="clear-completed">
+      Clear completed (1)
+    </button>
+  </footer>
+</section>
