@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
     return this.get('model').filterBy('isCompleted', true).get('length');
   }),
 
-  allAreDone: Ember.computed("model.@each.isCompleted", function(key, value){
+  allAreDone: Ember.computed("model.@each.isCompleted", function(){
     return this.get('model').get('length') && this.get('model').isEvery('isCompleted');
   }),
 
