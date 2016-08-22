@@ -4,10 +4,11 @@
     {{#if todo.isEditing}}
       {{edit-todo class="edit" value= todo.title focus-out=(action "acceptChanges" todo) insert-newline=(action "acceptChanges" todo)}}
     {{else}}
-      <input type="checkbox" checked={{todo.isCompleted}} classNames="toggle" {{action "markComplete" todo}}>
+      {{input type='checkbox' checked=todo.isCompleted className="toggle"}}
+
       <label {{action "editToDo" todo on= "doubleClick"}} >{{todo.title}}
         {{#if todo.completedAt}}
-          {{moment-from-now todo.completedAt interval=1000}}
+          {{moment-from-now todo.completedAt interval=1000}} {{format-date todo.completedAt}}
         {{/if}}
       </label>
       <button class="destroy" {{action "removeToDo" todo}}></button>
